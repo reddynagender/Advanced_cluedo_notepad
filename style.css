@@ -1,0 +1,163 @@
+body{
+    background: #8D4DED;
+    background: radial-gradient(circle,rgba(141, 77, 237, 1) 0%, rgba(49, 22, 136, 1) 100%);
+    height:100vh;
+    padding:15px;
+    font-size:14px;
+}
+.choosePlayers{
+    width:370px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align:center;
+}
+.bgGradChoosePlayers{
+    background: #3FF900;
+    background: linear-gradient(180deg,rgba(63, 249, 0, 1) 0%, rgba(21, 185, 2, 1) 100%);
+    border-radius:10px;
+    padding:30px;
+    border:4px solid #34c902;
+}
+::placeholder{
+    color:#fefefe;
+}
+input, select{
+    background-color: #aa4530;
+    color: #fefefe;
+    border: 2px solid #972d18;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.choosePlayers .logo{
+    width:200px;
+    /* margin-bottom:30px; */
+}
+.sublinelogo{
+    margin-bottom:10px;
+    color:#fff;
+}
+table{
+    border-radius:10px;
+    border:4px solid #34c902;
+}
+ table td,th{
+    border:1px solid #35d200;
+ }
+ table tr,td button{
+    width:100%;
+    height:35px;
+    background-color:transparent;
+    border:none;
+ }
+ #playersInputs{
+    margin-top:20px;
+ }
+ #playersInputs input{
+    width:100%;
+    margin-bottom:10px;
+ }
+ .gameBoard .logo{
+    height:60px;
+ }
+ .gameBoard{
+    text-align:center;
+ }
+ .gameTable{
+    margin: auto;
+    background-color: #3FF900;
+ }
+ .gameTable th{
+    padding:10px;
+ }
+ .iconsSizeBtn{
+    width:20px;
+ }
+ .susImg{
+    /* height:60px; */
+    border-radius:3px;
+    display:none;
+ }
+ .headingSubSub{
+    background-color: #aa4530;
+    color: #fff;
+    padding: 0;
+    font-size: 15px;
+ }
+ .choosePlayTurn{
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:#3FF900;
+    border:4px solid #34c902;
+    padding:20px;
+    border-radius:15px;
+ }
+ .choosePlayTurn > p{
+    margin-bottom:10px;
+ }
+ .cardsEgments{
+    display:flex;
+    gap:15px;
+ }
+ .cardsEgments > div{
+    text-align:center;
+ }
+ .cardsEgments > div img{
+    width:100%;
+    border-radius:7px;
+ }
+ .cardsEgments > div p{
+    margin-bottom:5px;
+ }
+ .cardsEgments > div p.mainName{
+    font-weight:700;
+ }
+.playerOpted {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.playerOpted button{
+    width:calc(50% - 5px);
+    background-color: #aa4530;
+    color: #fefefe;
+    border: 2px solid #972d18;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.closebtns{
+    text-align: right;
+    background-color: #733ed1;
+    color: #fefefe;
+    border: 2px solid #733ed1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+.theend{
+    text-align: right;
+    background-color: #f00024;
+    color: #fefefe;
+    border: 2px solid #f00024;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom:20px;
+}
+.playertxts{
+    font-weight:700;
+    margin-top:10px;
+}
+.closme{
+    margin-bottom: -10px !important;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: underline;
+}
+.showbox{
+    display:none;
+}

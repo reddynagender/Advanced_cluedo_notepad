@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="choosePlayers">
+        <img src="assets/icons/cluedo-logo.webp" alt="cluedo logo" class="logo">
+        <p class="sublinelogo">Gamepad</p>
+        <div class="bgGradChoosePlayers">
+            <form name="playerCount" id="playerCountForm">
+                <label for="playerCount">Select number of players:</label>
+                <select name="playerCount" id="playerCount">
+                    <option value="2">2 Players</option>
+                    <option value="3">3 Players</option>
+                    <option value="4">4 Players</option>
+                    <option value="5">5 Players</option>
+                    <option value="6">6 Players</option>
+                </select>
+                <div id="playersInputs">
+                    <input type="text" name="player1" placeholder="Player 1 Name" value="nagender" required>
+                    <input type="text" name="player2" placeholder="Player 2 Name" value="chintu" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Start Game</button>
+            </form>
+        </div>
+    </div>
+    <div class="gameBoard" style="display:none;">
+        <div class="entryBoard">            
+        </div>
+        <img src="assets/icons/cluedo-logo.webp" alt="cluedo logo" class="logo">
+        <p class="sublinelogo">Gamepad</p>
+        <div id="board"></div>
+        <button class="theend">End Turn</button>
+    </div>
+    <div class="choosePlayTurn showbox">
+        <p><b class="turnName"></b> Asked for</p>
+        <div class="cardsEgments">
+            <div class="suspectCard" data-card="">
+                <p class="mainName">Suspect</p>
+                <div class="optsuspect" data-card="Colonel Mustard">
+                    <img src="assets/cards/yellow-plum.jpg">
+                    <p>Colonel Mustard</p>
+                </div>
+            </div>
+            <div class="weaponCard" data-card="">
+                <p class="mainName">Weapon</p>
+                <div class="optweapon" data-card="Knife">
+                    <img src="assets/cards/yellow-plum.jpg">
+                    <p>Knife</p>
+                </div>
+            </div>
+            <div class="roomCard" data-card="">
+                <p class="mainName">Room</p>
+                <div class="optroom" data-card="Hall">
+                    <img src="assets/cards/yellow-plum.jpg">
+                    <p>Hall</p>
+                </div>
+            </div>
+        </div>
+        <p class="playertxts">Choose Player who showed the card</p>
+        <div class="playerOpted">
+        </div>
+        <p class="closme">Close</p>
+        <!-- <button class="submit closebtns">Done</button> -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

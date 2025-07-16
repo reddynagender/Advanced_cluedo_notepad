@@ -1,0 +1,98 @@
+{
+    "suspects": [
+        {
+            "name": "Colonel Mustard",
+            "color": "yellow",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Professor Plum",
+            "color": "purple",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Reverent Green",
+            "color": "green",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Mr. Peacock",
+            "color": "blue",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Miss Scarlet",
+            "color": "red",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Mrs. White",
+            "color": "white",
+            "image": "assets/cards/yellow-plum.jpg"
+        }
+    ],
+    "weapons": [
+        {
+            "name": "Knife",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Candlestick",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Revolver",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Rope",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Lead Pipe",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Wrench",
+            "image": "assets/cards/yellow-plum.jpg"
+        }
+    ],
+    "rooms": [
+        {
+            "name": "Hall",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Lounge",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Dining Room",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Kitchen",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Ballroom",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Conservatory",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Billiard Room",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Library",
+            "image": "assets/cards/yellow-plum.jpg"
+        },
+        {
+            "name": "Study",
+            "image": "assets/cards/yellow-plum.jpg"
+        }
+    ]
+}
