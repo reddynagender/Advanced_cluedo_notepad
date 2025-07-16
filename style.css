@@ -102,16 +102,20 @@ table{
  .cardsEgments{
     display:flex;
     gap:15px;
+    flex-wrap:wrap;
  }
  .cardsEgments > div{
     text-align:center;
+    width:calc(33.33% - 10px);
  }
  .cardsEgments > div img{
     width:100%;
     border-radius:7px;
  }
  .cardsEgments > div p{
-    margin-bottom:5px;
+    margin-bottom: 5px;
+    line-height: 1.1;
+    margin-top: 5px;
  }
  .cardsEgments > div p.mainName{
     font-weight:700;
