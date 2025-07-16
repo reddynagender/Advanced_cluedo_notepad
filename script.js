@@ -51,7 +51,9 @@ class ManageSessionStorage{
             console.error(`Player ${playerName} not found in session storage.`);
             return;
         }
-        playerData[type].push(cards);
+        if(!playerData[type].includes(cards)){
+            playerData[type].push(cards);
+        }
         try{
             sessionStorage.setItem("player-"+playerName,JSON.stringify(playerData));
         }catch(e){
@@ -376,6 +378,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // create suspects row
             let elementsRow = document.createElement("tr");
             let elementsTh = document.createElement("th");
+            let cardsLeader = document.getElementsByClassName("popupSuspectChoose")[0].querySelector(".cardsList");
             elementsTh.textContent = "Suspects";
             elementsTh.className = "headingSubSub";
             elementsTh.colSpan = playersNames.length + 1;
@@ -401,12 +404,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 })
                 tableBody.appendChild(suspectTr);
                 
+                // generating for choose board
+                let chooseBoard = document.createElement("img");
+                chooseBoard.src = suspect.image;
+                chooseBoard.setAttribute("data-card",suspect.name);
+                chooseBoard.className = "suspectCBoard";
+                cardsLeader.appendChild(chooseBoard);
             })
             // create suspects row
 
             // create weapon row
             let roomTr = document.createElement('tr');
             let roomth = document.createElement('th');
+            let cardsLeader2 = document.getElementsByClassName("popupWeaponChoose")[0].querySelector(".cardsList");
             roomth.textContent = "Weapons";
             roomth.className = "headingSubSub";
             roomth.colSpan = playersNames.length + 1;
@@ -431,12 +441,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 });
                 tableBody.appendChild(weaTr);
+
+                // generating for choose board
+                let chooseBoard = document.createElement("img");
+                chooseBoard.src = weapon.image;
+                chooseBoard.setAttribute("data-card",weapon.name);
+                chooseBoard.className = "weaponCBoard";
+                cardsLeader2.appendChild(chooseBoard);
             })
             // create weapon row
 
             // create room row
             let weaponTr = document.createElement('tr');
             let weaponth = document.createElement('th');
+            let cardsLeader3 = document.getElementsByClassName("popupRoomChoose")[0].querySelector(".cardsList");
             weaponth.textContent = "Rooms";
             weaponth.className = "headingSubSub";
             weaponth.colSpan = playersNames.length + 1;
@@ -461,6 +479,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 });
                 tableBody.appendChild(roTr);
+                
+                // generating for choose board
+                let chooseBoard = document.createElement("img");
+                chooseBoard.src = room.image;
+                chooseBoard.setAttribute("data-card",room.name);
+                chooseBoard.className = "roomCBoard";
+                cardsLeader3.appendChild(chooseBoard);
             })
             // create rooms row
             
@@ -502,6 +527,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             let allPlayers = storage.getPlayerData();
             let playerStore = document.getElementsByClassName("playerOpted")[0];
+            playerStore.innerHTML="";
             for(let i=0;i<allPlayers.length;i++){
                 if(player !== allPlayers[i]){
                     let btn = document.createElement("button");
@@ -550,10 +576,52 @@ document.addEventListener("DOMContentLoaded", function() {
             try{
                 // prob.addProb("play1",[1,0,5]);
                 prob.addProb(player,probDataArr);
+                document.getElementsByClassName("choosePlayTurn")[0].classList.toggle("showbox");
             }catch(e){
                 console.warn(e);
             }
         }
+        if(event.target && event.target.classList.contains("suspectCBoard")) {
+            let card_Name = event.target.getAttribute("data-card");
+            let card_img = event.target.getAttribute("src");
+            let query = document.getElementsByClassName("optsuspect");
+
+            query[0].setAttribute("data-card",card_Name);
+            query[0].querySelector("img").setAttribute("src",card_img);
+            query[0].querySelector("p").textContent = card_Name;
+            
+            document.getElementsByClassName("popupSuspectChoose")[0].classList.toggle("showbox");
+        }
+        if(event.target && event.target.classList.contains("weaponCBoard")) {
+            let card_Name = event.target.getAttribute("data-card");
+            let card_img = event.target.getAttribute("src");
+            let query = document.getElementsByClassName("optweapon");
+
+            query[0].setAttribute("data-card",card_Name);
+            query[0].querySelector("img").setAttribute("src",card_img);
+            query[0].querySelector("p").textContent = card_Name;
+            document.getElementsByClassName("popupWeaponChoose")[0].classList.toggle("showbox");
+        }
+        if(event.target && event.target.classList.contains("roomCBoard")) {
+            let card_Name = event.target.getAttribute("data-card");
+            let card_img = event.target.getAttribute("src");
+            let query = document.getElementsByClassName("optroom");
+
+            query[0].setAttribute("data-card",card_Name);
+            query[0].querySelector("img").setAttribute("src",card_img);
+            query[0].querySelector("p").textContent=card_Name;
+            document.getElementsByClassName("popupRoomChoose")[0].classList.toggle("showbox");
+        }
+    });
+    
+    document.getElementsByClassName("optsuspect")[0].addEventListener("click",()=>{
+        document.getElementsByClassName("popupSuspectChoose")[0].classList.toggle("showbox");
+    });
+    document.getElementsByClassName("weaponCard")[0].addEventListener("click",()=>{
+        document.getElementsByClassName("popupWeaponChoose")[0].classList.toggle("showbox");
+    });
+    document.getElementsByClassName("roomCard")[0].addEventListener("click",()=>{
+        document.getElementsByClassName("popupRoomChoose")[0].classList.toggle("showbox");
     });
 
     if(storage.getPlayerData().length > 0){

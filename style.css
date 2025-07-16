@@ -161,3 +161,31 @@ table{
 .showbox{
     display:none;
 }
+.chooseCardsOn{
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:#3FF900;
+    border:4px solid #34c902;
+    padding:20px;
+    border-radius:15px;
+}
+.chooseCardsOn p{
+   text-align: center;
+   margin-bottom:0;
+   font-weight:700;
+   margin-bottom:15px;
+   margin-top:-10px;
+   font-size:16px;
+}
+.chooseCardsOn .cardsList{
+   display: flex;
+   flex-wrap:wrap;
+   gap:10px;
+}
+.chooseCardsOn .cardsList img{
+   width:calc(30% - 4px);
+   border-radius:5px;
+}
