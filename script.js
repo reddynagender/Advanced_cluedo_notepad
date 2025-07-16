@@ -90,9 +90,12 @@ class ProbStrategy{
         for(let play in this.probArr){
             for(let key in this.probArr[play]){
                 let arr = this.probArr[play][key];
-                if(arr.length === 1){
-                    // run controller
-                    controller(play,arr[0],"holdingCards",false);
+                console.log(arr);
+                if(arr !== null){
+                    if(arr.length === 1){
+                        // run controller
+                        controller(play,arr[0],"holdingCards",false);
+                    }
                 }
             }
         }
@@ -100,39 +103,77 @@ class ProbStrategy{
     }
     addProb(player,cards){
         let prob = JSON.parse(sessionStorage.getItem("probability")) || {};
+        let filteredCard = [];
+        let FinalfilteredCard = [];
+        let players = storage.getPlayerData();
+        for(let k=0;k<cards.length;k++){
+            let cardExist = false;
+            for(let i=0;i<players.length;i++){
+                let playersData = storage.getPlayerData(players[i]);
+                if(playersData.holdingCards.includes(cards[k])){
+                    cardExist = true;
+                }
+            }
+            if(!cardExist){
+                filteredCard.push(cards[k]);
+            }
+        }
+        for(let k=0;k<filteredCard.length;k++){
+            let cardExist = false;
+            let playerData = storage.getPlayerData(player);
+            if(playerData.eliminatedCards.includes(filteredCard[k])){
+                cardExist = true;
+            }
+            if(!cardExist){
+                FinalfilteredCard.push(filteredCard[k]);
+            }
+        }
         if(!prob.hasOwnProperty(player)){
-            prob[player] = [cards];
+            prob[player] = [FinalfilteredCard];
         }else{
-            prob[player].push(cards);
+            prob[player].push(FinalfilteredCard);
         }
         try{
+            console.log(prob);
             sessionStorage.setItem("probability",JSON.stringify(prob));
+            this.runCheck();
         }catch(e){
             console.log(`error adding probability ${e}`);
         }
     }
     // status --true-- if just to remove particular element from person only
     eliminateCards(player,card,status){
+        this.probArr = JSON.parse(sessionStorage.getItem("probability"));
         for(let play in this.probArr){
             for(let key in this.probArr[play]){
                 let arr = this.probArr[play][key];
+                console.log(arr);
                 if(play === player && status === false){
                     if(arr.includes(card)){
-                        delete this.probArr[play][key];
-                    }
-                }else if(play === player && status === true){
-                    if(arr.includes(card)){
+                        console.log(`delete ${this.probArr[play][key]}`);
+                        console.log(this.probArr);
+                        // delete this.probArr[play][key];
                         this.probArr[play][key] = arr.filter(num => num !== card);
+                        console.log(this.probArr);
+                    }
+                }
+                else if(play === player && status === true){
+                    if(arr.includes(card)){
+                        console.log(`eliminating for player ${this.probArr[play][key]}`);
+                        this.probArr[play][key] = arr.filter(num => num !== card);
+                        console.log(this.probArr);
                     }
                 }else if(status !== true){
                     if(arr.includes(card)){
+                        console.log(`eliminating for player ${this.probArr[play][key]}`);
                         this.probArr[play][key] = arr.filter(num => num !== card);
+                        console.log(this.probArr);
                     }
                 }
             }
         }
         sessionStorage.setItem("probability",JSON.stringify(this.probArr));
-        this.runCheck();
+        // this.runCheck();
     }
 }
 // Manage probabilty strategy
