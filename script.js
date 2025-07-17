@@ -90,7 +90,7 @@ class ProbStrategy{
         for(let play in this.probArr){
             for(let key in this.probArr[play]){
                 let arr = this.probArr[play][key];
-                console.log(arr);
+                // console.log(arr);
                 if(arr !== null){
                     if(arr.length === 1){
                         // run controller
@@ -147,14 +147,10 @@ class ProbStrategy{
         for(let play in this.probArr){
             for(let key in this.probArr[play]){
                 let arr = this.probArr[play][key];
-                console.log(arr);
+                // console.log(arr);
                 if(play === player && status === false){
                     if(arr.includes(card)){
-                        console.log(`delete ${this.probArr[play][key]}`);
-                        console.log(this.probArr);
-                        // delete this.probArr[play][key];
                         this.probArr[play][key] = arr.filter(num => num !== card);
-                        console.log(this.probArr);
                     }
                 }
                 else if(play === player && status === true){
@@ -604,6 +600,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
         if(event.target && event.target.classList.contains("playersCapture")) {
+            console.log("clicked player capture");
             let player = event.target.getAttribute("data-player");
             let suspect = document.getElementsByClassName("optsuspect")[0].getAttribute("data-card");
             let weapon = document.getElementsByClassName("optweapon")[0].getAttribute("data-card");
@@ -611,14 +608,30 @@ document.addEventListener("DOMContentLoaded", function() {
             let askedPlayer = document.getElementsByClassName("turnName")[0].getHTML();
 
             let allPlayers = storage.getPlayerData();
+            console.log("all players");
+            console.log(allPlayers);
             let revAllPlayers = allPlayers.reverse();
+            console.log("rev players");
+            console.log(revAllPlayers);
 
             let startArr = revAllPlayers.indexOf(askedPlayer);
+            console.log("start players");
+            console.log(startArr);
             let endArr = revAllPlayers.indexOf(player);
+            console.log("end players");
+            console.log(endArr);
 
-            let eliminatePlayerCards = revAllPlayers.slice(startArr+1,endArr);
+            let eliminatePlayerCards = [];
+            
+            if(startArr > endArr){
+                eliminatePlayerCards = revAllPlayers.slice(startArr+1).concat(revAllPlayers.slice(0,endArr));
+            }else{
+                eliminatePlayerCards = revAllPlayers.slice(startArr+1,endArr);
+            }
 
+            console.log(eliminatePlayerCards);
             for(let i=0;i<eliminatePlayerCards.length;i++){
+                console.log(`eliminating for ${eliminatePlayerCards[i]} ${suspect} ${weapon} ${room}`);
                 controller(eliminatePlayerCards[i],suspect,"eliminatedCards",false);
                 controller(eliminatePlayerCards[i],weapon,"eliminatedCards",false);
                 controller(eliminatePlayerCards[i],room,"eliminatedCards",false);
@@ -689,7 +702,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     if(storage.getPlayerData().length > 0){
-        console.log(storage.getPlayerData());
+        // console.log(storage.getPlayerData());
         document.querySelector(".choosePlayers").style.display="none";
         document.querySelector(".gameBoard").style.display="block";
         generateGameTable();
