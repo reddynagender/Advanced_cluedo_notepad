@@ -193,3 +193,29 @@ table{
    width:calc(30% - 4px);
    border-radius:5px;
 }
+.playerClicki{
+   font-size: 10px;
+   background-color: #aa4530;
+   padding: 3px 5px;
+   border-radius: 7px;
+   color: #fff;
+}
+.headfontad{
+   text-align: left;
+   position: relative;
+   padding-left:17px !important;
+}
+.headfontad span{
+   width: 5px;
+   height: 5px;
+   display: inline-block;
+   background-color: #0000f6;
+   border-radius: 50%;
+   position: absolute;
+   left: 10px;
+   top: 50%;
+   transform: translate(-50%, -50%);
+}
+.headfontad span.active{
+   background-color: #f60000;
+}

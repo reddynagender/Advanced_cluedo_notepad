@@ -196,6 +196,28 @@ class ReloadInterface{
                 if(element){
                     element.disabled = true;
                     element.innerHTML = "<img src='assets/icons/check.png' class='iconsSizeBtn'>";
+
+                     // active icon for row 
+                    let tdParent = element.closest('td');
+
+                    if (tdParent) {
+                        // Find sibling with class 'headfontad'
+                        const headerSibling = tdParent.parentElement.querySelector('.headfontad');
+                        if (headerSibling) {
+                            // Find <span> inside that sibling
+                            const spanInside = headerSibling.querySelector('span');
+                            if (spanInside) {
+                                spanInside.classList.add('active');
+                            } else {
+                                console.warn("No <span> found inside .headfontad");
+                            }
+                        } else {
+                            console.warn("Sibling with class .headfontad not found");
+                        }
+                    } else {
+                        console.warn("Parent <td> not found");
+                    }
+                     // active icon for row 
                 }else{
                     console.log(` element not exist .gameInput[data-card="${holdingCards[j]}"][data-player="${players[i]}"]`);
                 }
@@ -404,7 +426,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(player !== undefined && player !== null && player !== ""){
                     let th = document.createElement("th");
                     th.textContent = player;
-                    th.className = "playerClicki";
+                    th.innerHTML = `${player}<br><span class="playerClicki" data-player="${player}">Update Turn</span>`;
+                    th.className = "";
                     th.setAttribute("data-player",player);
                     headerRow.appendChild(th);
                 }
@@ -429,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function() {
             suspects.forEach(suspect => {
                 let suspectTr = document.createElement("tr");
                 let suspectTh = document.createElement("th");
-                suspectTh.innerHTML = `<img src="${suspect.image}" class="susImg" alt="${suspect.name}">${suspect.name}`;
+                suspectTh.innerHTML = `<span></span><img src="${suspect.image}" class="susImg" alt="${suspect.name}">${suspect.name}`;
                 suspectTh.className = `suspect-${suspect.name} headfontad`;
                 suspectTh.setAttribute("data-suspect", suspect.name);
                 suspectTh.setAttribute("status", '');
@@ -467,7 +490,7 @@ document.addEventListener("DOMContentLoaded", function() {
             weapons.forEach(weapon => {
                 let weaTr = document.createElement("tr");
                 let weaTd = document.createElement("th");
-                weaTd.innerHTML = `<img src="${weapon.image}" class="susImg"  alt="${weapon.name}">${weapon.name}`;
+                weaTd.innerHTML = `<span></span><img src="${weapon.image}" class="susImg"  alt="${weapon.name}">${weapon.name}`;
                 weaTd.className = `weapon-${weapon.name} headfontad`;
                 weaTd.setAttribute("data-weapon", weapon.name);
                 weaTd.setAttribute("status", '');
@@ -505,7 +528,7 @@ document.addEventListener("DOMContentLoaded", function() {
             rooms.forEach(room => {
                 let roTr = document.createElement("tr");
                 let roTd = document.createElement("th");
-                roTd.innerHTML = `<img src="${room.image}" class="susImg"  alt="${room.name}">${room.name}`;
+                roTd.innerHTML = `<span></span><img src="${room.image}" class="susImg"  alt="${room.name}">${room.name}`;
                 roTd.className = `rooms-${room.name} headfontad`;
                 roTd.setAttribute("data-rooms", room.name);
                 roTd.setAttribute("status", '');
