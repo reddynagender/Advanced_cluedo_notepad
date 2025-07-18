@@ -190,7 +190,7 @@ table{
    gap:10px;
 }
 .chooseCardsOn .cardsList img{
-   width:calc(30% - 4px);
+   width:calc(33.33% - 7px);
    border-radius:5px;
 }
 .playerClicki{

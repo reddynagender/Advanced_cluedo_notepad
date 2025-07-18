@@ -30,14 +30,10 @@ class ManageSessionStorage{
                     playersData[i] = playerData;
                 }
             }
-            let sortedPlayers = playersData.sort((a, b) => a.order[0] - b.order[0]);
+            let sortedPlayers = playersData.filter(Boolean).sort((a, b) => a.order[0] - b.order[0]);
             let newSortedPlayers = [];
             for(let k=0;k<sortedPlayers.length;k++){
-                try{
-                    newSortedPlayers.push(sortedPlayers[k].name);
-                }catch(e){
-                    console.log(e);
-                }
+                newSortedPlayers.push(sortedPlayers[k].name);
             }
             return newSortedPlayers;
         }else{
@@ -75,14 +71,44 @@ class ManageSessionStorage{
 let playersList = [];
 let storage = new ManageSessionStorage();
 
+function checkSegmentsCard(overallCards){
+    let segmentCards = overallCards;
+    let playersNames = storage.getPlayerData();
+
+    for(let i=0;i<overallCards.length;i++){
+        for(let j=0;j<playersNames.length;j++){
+            let playerData = storage.getPlayerData(playersNames[j]);
+            let holdings = playerData.holdingCards;
+            if(holdings.includes(overallCards[i].name)){
+                segmentCards = segmentCards.filter(card => card.name !== overallCards[i].name);
+                break;
+            }
+        }
+    }
+
+    if(segmentCards.length === 1){
+        for(let i=0;i<playersNames.length;i++){
+            console.log(`segment E from ${playersNames[i]} ${segmentCards[0].name}`)
+            controller(playersNames[i],segmentCards[0].name,"eliminatedCards",false,true);
+        }
+    }
+}
+
+async function checkLeftCardInSegment(){
+    let elements = await fetch("elements.json");
+    let cards = await elements.json();
+
+    let suspects = cards.suspects;
+    let weapons = cards.weapons;
+    let rooms = cards.rooms;
+
+    checkSegmentsCard(suspects);
+    checkSegmentsCard(weapons);
+    checkSegmentsCard(rooms);
+}
 
 // Manage probabilty strategy
 class ProbStrategy{
-    // check for single element array and mark as card exist with layer
-    constructor(){
-        this.probArr = {};
-        sessionStorage.setItem("probability",JSON.stringify(this.probArr));
-    }
     // check for confirmed cards
     runCheck(){
         let probArrStor = sessionStorage.getItem("probability");
@@ -303,7 +329,7 @@ function checkPlayerLimit(){
 }
 
 // if recurring is true then it stop running cardLimitCheck
-function controller(player,card,type,recurring){
+function controller(player,card,type,recurring,checkSegment=false){
 
     // add or remove card from player
     storage.updatePlayerCards(player,card,type);
@@ -328,6 +354,11 @@ function controller(player,card,type,recurring){
 
     // run probability single element exist check
     prob.runCheck();
+
+    // check if segment cleared
+    if(!checkSegment){
+        checkLeftCardInSegment();
+    }
 
     // reload the interface
     reload.run();
@@ -702,7 +733,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     if(storage.getPlayerData().length > 0){
-        // console.log(storage.getPlayerData());
         document.querySelector(".choosePlayers").style.display="none";
         document.querySelector(".gameBoard").style.display="block";
         generateGameTable();
